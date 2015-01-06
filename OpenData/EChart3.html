@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            },
+            packages: [
+                {
+                    name: 'BMap',
+                    location: '../src',
+                    main: 'main'
+                }
+            ]
+        });
+
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/line',
+                'BMap',
+                'echarts/chart/map'
+            ],
+            //function (ec) {
+          function (echarts, BMapExtension) {
+              // 基于准备好的dom，初始化echarts图表
+              //var myChart = ec.init(document.getElementById('main'));
+
+              // 在这之前必须加装ECharts、百度地图API文件、引用扩展文件
+              //var myBMapExt = new BMapExt($('#main')[0], BMap, echarts);
+              // 获取地图实例
+              //var map = myBMapExt.getMap();
+
+              // 初始化地图
+              var BMapExt = new BMapExtension($('#main')[0], BMap, echarts);
+              var map = BMapExt.getMap();
+              var container = BMapExt.getEchartsContainer();
+
+
+              // 以下是地图的操作，详细api请前往百度地图API官网
+              var startPoint = {
+                  x: 104.114129,
+                  y: 37.550339
+              };
+              var point = new BMap.Point(startPoint.x, startPoint.y);
+              map.centerAndZoom(point, 5);
+              map.enableScrollWheelZoom(true);
+
+
+              var option = {
+                  color: ['gold', 'aqua', 'lime'],
+                  title: {
+                      text: '模拟迁徙',
+                      subtext: '数据纯属虚构',
+                      x: 'right'
+                  },
+                  tooltip: {
+                      trigger: 'item',
+                      formatter: function (v) {
+                          return v[1].replace(':', ' > ');
+                      }
+                  },
+                  legend: {
+                      orient: 'vertical',
+                      x: 'left',
+                      data: ['台北', '台南', '高雄'],
+                      selectedMode: 'single',
+                      selected: {
+                          '台南': false,
+                          '高雄': false
+                      }
+                  },
+                  toolbox: {
+                      show: true,
+                      orient: 'vertical',
+                      x: 'right',
+                      y: 'center',
+                      feature: {
+                          mark: { show: true },
+                          dataView: { show: true, readOnly: false },
+                          restore: { show: true },
+                          saveAsImage: { show: true }
+                      }
+                  },
+                  dataRange: {
+                      min: 0,
+                      max: 100,
+                      y: '60%',
+                      calculable: true,
+                      color: ['#ff3333', 'orange', 'yellow', 'lime', 'aqua']
+                  },
+                  series: [
+                      {
+                          name: '台北',
+                          type: 'map',
+                          mapType: 'none',
+                          data: [],
+                          geoCoord: {
+                              "台北": [121.33, 25.04],
+                              "台南": [120.58, 23.58],
+                              "高雄": [120.58, 22.58],
+                              "花蓮": [121.05, 25.04]
+                          },
+
+                          markLine: {
+                              smooth: true,
+                              effect: {
+                                  show: true,
+                                  scaleSize: 1,
+                                  period: 30,
+                                  color: '#fff',
+                                  shadowBlur: 10
+                              },
+                              itemStyle: {
+                                  normal: {
+                                      borderWidth: 1,
+                                      lineStyle: {
+                                          type: 'solid',
+                                          shadowBlur: 10
+                                      }
+                                  }
+                              },
+                              data: [
+                                  [{ name: '台北' }, { name: '台南', value: 95 }],
+                                  [{ name: '台北' }, { name: '高雄', value: 90 }]
+                              ]
+                          },
+                          markPoint: {
+                              symbol: 'emptyCircle',
+                              symbolSize: function (v) {
+                                  return 10 + v / 10
+                              },
+                              effect: {
+                                  show: true,
+                                  shadowBlur: 0
+                              },
+                              itemStyle: {
+                                  normal: {
+                                      label: { show: false }
+                                  }
+                              },
+                              data: [
+                                  { name: '台南', value: 95 },
+                                  { name: '高雄', value: 90 }
+                              ]
+                          }
+
+                      },
+                      {
+                          name: '台南',
+                          type: 'map',
+                          mapType: 'none',
+                          data: [],
+                          markLine: {
+                              smooth: true,
+                              effect: {
+                                  show: true,
+                                  scaleSize: 1,
+                                  period: 30,
+                                  color: '#fff',
+                                  shadowBlur: 10
+                              },
+                              itemStyle: {
+                                  normal: {
+                                      borderWidth: 1,
+                                      lineStyle: {
+                                          type: 'solid',
+                                          shadowBlur: 10
+                                      }
+                                  }
+                              },
+                              data: [
+                                  [{ name: '台南' }, { name: '高雄', value: 95 }]
+                              ]
+                          },
+                          markPoint: {
+                              symbol: 'emptyCircle',
+                              symbolSize: function (v) {
+                                  return 10 + v / 10
+                              },
+                              effect: {
+                                  show: true,
+                                  shadowBlur: 0
+                              },
+                              itemStyle: {
+                                  normal: {
+                                      label: { show: false }
+                                  }
+                              },
+                              data: [
+                                  { name: '高雄', value: 10 }
+                              ]
+                          }
+                      },
+                      {
+                          name: '高雄',
+                          type: 'map',
+                          mapType: 'none',
+                          data: [],
+                          markLine: {
+                              smooth: true,
+                              effect: {
+                                  show: true,
+                                  scaleSize: 1,
+                                  period: 30,
+                                  color: '#fff',
+                                  shadowBlur: 10
+                              },
+                              itemStyle: {
+                                  normal: {
+                                      borderWidth: 1,
+                                      lineStyle: {
+                                          type: 'solid',
+                                          shadowBlur: 10
+                                      }
+                                  }
+                              },
+                              data: [
+                                  [{ name: '高雄' }, { name: '花蓮', value: 30 }]
+                              ]
+                          },
+                          markPoint: {
+                              symbol: 'emptyCircle',
+                              symbolSize: function (v) {
+                                  return 10 + v / 10
+                              },
+                              effect: {
+                                  show: true,
+                                  shadowBlur: 0
+                              },
+                              itemStyle: {
+                                  normal: {
+                                      label: { show: false }
+                                  }
+                              },
+                              data: [
+                                  { name: '花蓮', value: 60 }
+                              ]
+                          }
+                      },
+                      {
+                          name: '全国',
+                          type: 'map',
+                          mapType: 'none',
+                          data: [],
+                          markLine: {
+                              smooth: true,
+                              symbol: ['none', 'circle'],
+                              symbolSize: 1,
+                              itemStyle: {
+                                  normal: {
+                                      color: '#fff',
+                                      borderWidth: 1,
+                                      borderColor: 'rgba(30,144,255,0.5)'
+                                  }
+                              },
+                              data: [
+                                  [{ name: '台北' }, { name: '台南' }],
+                                  [{ name: '台北' }, { name: '高雄' }],
+                                  [{ name: '台北' }, { name: '花蓮' }]
+                              ]
+                          }
+                      }
+                  ]
+              };
+
+              // 为echarts对象加载数据
+              //myChart.setOption(option);
+
+              // 获取echarts的dom容器
+              var container = BMapExt.getEchartsContainer();
+              // 通过initEcharts初始化echarts并获取实例
+              var myChart = BMapExt.initECharts(container);
+              // 设置option
+              BMapExt.setOption(option);
+          }
+        );
+    </script>
+</body>
