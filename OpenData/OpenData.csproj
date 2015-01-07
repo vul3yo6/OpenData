@@ -68,6 +68,7 @@
     <Content Include="Angular.html" />
     <Content Include="css\carousel.css" />
     <Content Include="css\cover.css" />
+    <Content Include="css\justified-nav.css" />
     <Content Include="EChart.html" />
     <Content Include="EChart2.html" />
     <Content Include="EChart3.html" />
@@ -84,6 +85,8 @@
     <Content Include="index_bak_01.html" />
     <Content Include="js\angular-scroll.js" />
     <Content Include="js\angular.js" />
+    <Content Include="js\app.js" />
+    <Content Include="js\myApp.js" />
     <Content Include="js\ng-map.min.js" />
     <Content Include="js\ui-bootstrap-tpls-0.12.0.min.js" />
     <Content Include="Test.html" />

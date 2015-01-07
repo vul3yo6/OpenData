@@ -16,12 +16,15 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
     <!--Java Script-->
+    <!--<script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB4d1nqRZ70kf4Fbiug_jlQxLQYIfy88iU&sensor=FALSE&callback=initialize"></script>-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
-    <script src="./js/app.js"></script>
+    <!--<script src="/js/app.js"></script>-->
+    <script src="/js/myApp.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="./css/justified-nav.css" rel="stylesheet" />
+    <link href="/css/justified-nav.css" rel="stylesheet" />
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -35,6 +38,7 @@
 
 </head>
 
+<!--<body onload="initialize()">-->
 <body>
 
     <div class="container">
@@ -43,27 +47,70 @@
             <h3 class="text-muted">Olive - Taiwan Open Data</h3>
             <nav>
                 <ul class="nav nav-justified">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Downloads</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li class="active"><a href="#">首頁</a></li>
+                    <li><a href="#">每日資訊</a></li>
+                    <li><a href="#">即時資訊及災情</a></li>
+                    <li><a href="#">捐贈物資</a></li>
+                    <li><a href="#">關於</a></li>
                 </ul>
             </nav><!-- /.navbar -->
         </div>
 
         <!-- Jumbotron -->
         <div class="jumbotron">
-            <h1>Marketing stuff!</h1>
-            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a id="send" class="btn btn-large btn-success" href="#">Get started today</a></p>
+            <h1>最新災害資訊!</h1>
+            <p class="lead">掌握災害資訊的詳細內容，了解颱風的即時動向，以防造成重大傷害。</p>
+            <!--<p><a id="send" class="btn btn-large btn-success" href="#">Get started today</a></p>-->
+            <div id="map_div" style="width:1000px; height:600px"></div>
         </div>
 
         <hr>
 
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+            <h1>災情快報</h1>
+            <p class="lead"></p>
+            <!--<div class="bs-example" data-example-id="thumbnails-with-custom-content">-->
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/88.jpg" alt="100%x200" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;" />
+                        <div class="caption">
+                            <h3>最新災情</h3>
+                            <p>掌握最新災情</p>
+                            <p><a href="#" class="btn btn-primary" role="button">回報災情</a> <a href="#" class="btn btn-default" role="button">最新災情</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/4b9d100d6c167.jpg" alt="100%x200" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;" />
+                        <div class="caption">
+                            <h3>避難場所</h3>
+                            <p>尋找最近的避難場所</p>
+                            <p><a href="#" class="btn btn-primary" role="button">尋求支援</a> <a href="#" class="btn btn-default" role="button">避難地點</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/flood.jpg" alt="100%x200" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;" />
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+                            <p class="text-danger">目前缺乏飲水及食物。</p>
+                            <p>協助災民重建家園。</p>
+                            <p><a href="#" class="btn btn-primary" role="button">捐贈物資</a> <a href="#" class="btn btn-default" role="button">登記需求</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+        
+        <hr>
+
         <!-- Example row of columns -->
-        <div class="row">
+        <!--<div class="row">
             <div class="col-lg-4">
                 <h2>Safari bug warning!</h2>
                 <p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
@@ -82,38 +129,30 @@
             </div>
         </div>
 
+        <hr>-->
+
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Safari bug warning!</h2>
-                <p id="result"></p>
+            <div class="col-lg-8">
+                <h2>明日降雨量</h2>
+                <p>出門攜帶雨具，嚴防豪雨成災。</p>
+                <p><div id="regions_div" style="width:1000px; height:600px"></div></p>
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+                <h2>河川整治金費</h2>
+                <p>統計各縣市河川整治金費。</p>
+                <p><div id="chart_div" style="width:1000px; height:600px"></div></p>
             </div>
         </div>
-
-
-        <div id="map_div"></div>
-
-        <hr>
 
         <!-- Site footer -->
         <footer class="footer">
             <p>&copy; Company 2015</p>
         </footer>
 
-    </div> <!-- /container -->
+        </div> <!-- /container -->
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-
     <!--<script src="../assets/js/jquery.js"></script>
     <script src="../assets/js/bootstrap-transition.js"></script>
     <script src="../assets/js/bootstrap-alert.js"></script>

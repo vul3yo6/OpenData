@@ -44,6 +44,7 @@ function getData() {
     //var URL = 'http://odata.tn.edu.tw/schoolapi/api/getdata?schoolid=110302';
     //var URL = 'http://opendata.epa.gov.tw/ws/Data/RainTenMin/?$format=json&$top=10&$skip=0&$orderby=SiteId ASC,SiteName DESC';
     var URL = 'http://odata.tn.edu.tw/schoolapi/api/getdata?schoolid=110302';
+    //var URL = 'http://opendata.epa.gov.tw/ws/Data/RainTenMin/?$orderby=PublishTime%20desc&$skip=0&$top=1000&format=json';
     $.ajax({
         type: 'GET',    // GET  POST
         dataType: 'JSONP',  // 記得是JSONP
@@ -76,7 +77,7 @@ function drawChart(jsonData) {
               [23.6924, 120.8437, '內茅埔-南投縣-信義鄉'],
               [22.8249, 120.2288, '永安-高雄市-永安區'],
               [24.9066, 121.0354, '湖口-新竹縣-湖口鄉'],
-              [121.1348, 24.9141, '楊梅-桃園市-楊梅區']
+              [24.9141, 121.1348, '楊梅-桃園市-楊梅區']
     ]);
 
     //// Create the data table.
@@ -106,6 +107,24 @@ function drawChart(jsonData) {
 
     var map = new google.visualization.Map(document.getElementById('map_div'));
     map.draw(data, options);
+
+
+
+    var myLatlng = new google.maps.LatLng(24.9141, 121.1348);
+    var mapOptions = {
+        zoom: 4,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+    }
+    var mapCanvas = new google.maps.Map(document.getElementById("map_div"), mapOptions);
+
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        title: "Hello World!"
+    });
+
+    // To add the marker to the map, call setMap();
+    marker.setMap(mapCanvas);
 }
 
 //function getData() {
