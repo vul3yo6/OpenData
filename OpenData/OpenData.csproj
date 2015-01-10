@@ -76,11 +76,15 @@
     <Content Include="GoogleChart_01.html" />
     <Content Include="GoogleChart_02.html" />
     <Content Include="GoogleChart_03.html" />
+    <Content Include="img\4b9d100d6c167.jpg" />
     <Content Include="img\500x500.svg" />
+    <Content Include="img\88.jpg" />
     <Content Include="img\cat_01.jpg" />
     <Content Include="img\cat_02.jpg" />
     <Content Include="img\cat_03.jpg" />
     <Content Include="img\cat_04.jpg" />
+    <Content Include="img\flood.jpg" />
+    <Content Include="img\w007.jpg" />
     <Content Include="index.html" />
     <Content Include="index_bak_01.html" />
     <Content Include="js\angular-scroll.js" />
