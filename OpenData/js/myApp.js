@@ -299,19 +299,30 @@ function drawChart() {
     //          ['Japan', 500]
     //]);
     var data3 = new google.visualization.DataTable();
-    data3.addColumn('string', 'City'); // Implicit domain label col.
-    data3.addColumn('number', 'Rainfall'); // Implicit series 1 data col.
-    data3.addRows([
-      //['Taipei', 200],
-      //['Taichung', 300],
-      //['Tainan', 400],
-      //['Kaohsiung', 500],
-      ['Taipei', 500],
-      ['Taichung', 400],
-      ['Tainan', 300],
-      ['Kaohsiung', 200],
-      ['Japan', 500]
-    ]);
+
+    data3.addColumn('number', 'LATITUDE', 'Latitude');
+    data3.addColumn('number', 'LONGITUDE', 'Longitude');
+    data3.addColumn('number', 'VALUE', 'Rainfall'); // Won't use this column, but still must define it.
+    data3.addColumn('string', 'HOVER', 'city');
+
+    data3.setValue(25.04, 121.511944, 700.00, 'Taipei');
+    data3.setValue(24.13678, 120.685008, 400.00, 'Taichung');
+    data3.setValue(23.02, 120.15, 300.00, 'Tainan');
+    data3.setValue(22.666072, 120.304782, 200.00, 'Kaohsiung');
+
+    //data3.addColumn('string', 'city'); // Implicit domain label col.
+    //data3.addColumn('number', 'Rainfall'); // Implicit series 1 data col.
+    //data3.addRows([
+    //  //['Taipei', 200],
+    //  //['Taichung', 300],
+    //  //['Tainan', 400],
+    //  //['Kaohsiung', 500],
+    //  ['Taipei', 700],
+    //  ['Taichung', 500],
+    //  ['Tainan', 400],
+    //  ['Kaohsiung', 300],
+    //  ['Japan', 700]
+    //]);
     //var data3 = google.visualization.arrayToDataTable([
     //          ['Country', 'Popularity'],
     //          ['Germany', 200],
